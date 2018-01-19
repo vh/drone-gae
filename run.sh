@@ -5,11 +5,6 @@ if [ -z $PLUGIN_PROJECT ]; then
     exit 1
 fi
 
-if [ -z $PLUGIN_VERSION ]; then
-    echo "Specify a version!"
-    exit 1
-fi
-
 if [ -z $GOOGLE_CREDENTIALS ]; then
     echo "No credentials provided!"
     exit 1
@@ -19,8 +14,14 @@ echo $GOOGLE_CREDENTIALS > /credentials.json
 
 gcloud auth activate-service-account --key-file=/credentials.json
 
-if [ -z $PLUGIN_APP_FILE ]; then
-  gcloud app deploy --project $PLUGIN_PROJECT --version $PLUGIN_VERSION --quiet
+if [ -n "$PLUGIN_APP_FILE" ]; then
+  CMD="gcloud app deploy $PLUGIN_APP_FILE -q --project $PLUGIN_PROJECT"
 else
-  gcloud app deploy $PLUGIN_APP_FILE --project $PLUGIN_PROJECT --version $PLUGIN_VERSION --quiet
+  CMD="gcloud app deploy -q --project $PLUGIN_PROJECT"
 fi
+
+if [ -n "$PLUGIN_VERSION" ]; then
+  CMD="$CMD --version $PLUGIN_VERSION"
+fi
+
+eval $CMD
