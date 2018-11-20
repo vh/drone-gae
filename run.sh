@@ -1,16 +1,16 @@
 #!/bin/bash
 
-if [ -z $PLUGIN_PROJECT ]; then
+if [ -z "$PLUGIN_PROJECT" ]; then
     echo "Specify a project!"
     exit 1
 fi
 
-if [ -z $GOOGLE_CREDENTIALS ]; then
+if [ -z "$GOOGLE_CREDENTIALS" ]; then
     echo "No credentials provided!"
     exit 1
 fi
 
-echo $GOOGLE_CREDENTIALS > /credentials.json
+echo "$GOOGLE_CREDENTIALS" > /credentials.json
 
 gcloud auth activate-service-account --key-file=/credentials.json
 
