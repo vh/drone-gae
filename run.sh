@@ -24,4 +24,9 @@ if [ -n "$PLUGIN_VERSION" ]; then
   CMD="$CMD --version $PLUGIN_VERSION"
 fi
 
+PLUGIN_PROMOTE=${PLUGIN_PROMOTE:=true}
+if [ "$PLUGIN_PROMOTE" != true ]; then
+  CMD="$CMD --no-promote"
+fi
+
 eval $CMD
