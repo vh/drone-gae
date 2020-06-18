@@ -1,4 +1,4 @@
-FROM google/cloud-sdk:296.0.1-alpine
+FROM google/cloud-sdk:297.0.1-alpine
 
 MAINTAINER Vadim Homchik <homchik@gmail.com>
 
